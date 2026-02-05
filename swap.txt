@@ -1,0 +1,5 @@
+font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #e0f7fa 0%, #80deea 50%, #4dd0e1 100%);
+            display: flex;
+            justify-content: center;
+            padding: 40px;
