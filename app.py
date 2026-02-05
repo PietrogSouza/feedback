@@ -25,7 +25,7 @@ def login_post():
         return render_template("login.html", erro = "Acesso Negado!")
 
 # PAGINA RESTRITA
-@app.route("/comentarios")
+@app.route("/comentarios", methods=["GET"])
 def pagina_comentario():
     return render_template("comentarios.html")
 
