@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -19,7 +20,7 @@
             background: white;
             padding: 2rem;
             border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
             width: 100%;
             max-width: 500px;
         }
@@ -66,7 +67,7 @@
         hr {
             margin: 2rem 0;
             border: 0;
-            border-top: 1px solid #eee;
+            border-top: 1px solid #eeeeee80;
         }
 
         .comments-list {
@@ -75,7 +76,7 @@
         }
 
         .comment-item {
-            background: #f9f9f9;
+            background: #f9f9f954;
             padding: 10px;
             border-radius: 6px;
             margin-bottom: 10px;
@@ -83,26 +84,75 @@
             font-size: 0.9rem;
             color: #555;
         }
+
+        /* Espaçamento entre as caixas de comentário */
+        .comment-box {
+            margin-bottom: 1rem;
+            border-left: 4px solid #4a4ae2;
+            /* Uma barrinha colorida lateral dá um toque premium */
+            transition: transform 0.2s;
+            border-radius: 5px;
+        }
+
+        /* Efeito de destaque ao passar o mouse */
+        .comment-box:hover {
+            transform: translateX(5px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Estilo para a lista vazia */
+        .comments-list {
+            padding: 1rem;
+            background-color: #f5f5f536;
+            border-radius: 8px;
+            color: #7a7a7a;
+            font-style: italic;
+        }
     </style>
 </head>
+
 <body>
 
-<div class="comment-container">
-    <h2>Deixe seu comentário</h2>
-    
-    <div class="input-group">
-        <input type="text" id="commentInput" placeholder="Escreva algo interessante...">
-        <button>Enviar Comentário</button>
-    </div>
+    <div class="comment-container">
+        <h2>Deixe seu comentário</h2>
 
-    <hr>
+        <div class="input-group">
+            <form action="/adicionar_comentario" method="POST">
+                <input type="text" id="commentInput" placeholder="Escreva algo interessante..." name="comentario">
+                <button type="submit">Enviar Comentário</button>
+            </form>
+        </div>
 
-    <div id="commentsList" class="comments-list">
-        <div class="comment-item">Seja o primeiro a comentar!</div>
+        <section class="section">
+            <h3 class="title is-5">Comentários</h3>
+            <div class="comments-container">
+                {% for comentario in lista_de_comentario %}
+                <div class="box comment-box">
+                    <article class="media">
+                        <div class="media-content">
+                            <div class="content">
+                                <p>
+                                    <strong>Usuário</strong> <small>agora mesmo</small>
+                                    <br>
+                                    {{ comentario }}
+                                </p>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+                {% endfor %}
+            </div>
+        </section>
+
+        <hr>
+
+        <div id="commentsList" class="comments-list">
+            <div class="comment-item">Seja o primeiro a comentar!</div>
+        </div>
     </div>
-</div>
 
 
 
 </body>
+
 </html>
