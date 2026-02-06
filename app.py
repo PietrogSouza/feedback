@@ -1,4 +1,4 @@
-from flask import Flask, render_template, redirect, request
+from flask import Flask, render_template, redirect, request, session
 
 app = Flask(__name__)
 
@@ -24,6 +24,7 @@ def login_post():
     senha = request.form.get("senha")
 
     if email == "pietro@gmail.com" and senha == "123":
+        session["email"] = "pietro@gmail.com"
         return redirect("/comentario")
     else:
         return render_template("login.html", erro = "Acesso Negado!")
@@ -31,7 +32,10 @@ def login_post():
 
 @app.route("/comentario", methods=["GET"])
 def pagina_comentario():
-    return render_template("comentarios.html", lista_de_comentario = lista_de_comentario)
+    if "email" in session:
+        return render_template("comentarios.html", lista_de_comentario = lista_de_comentario)   
+    else:
+        return redirect("/login")
 
 @app.route("/adicionar_comentario", methods=["POST"])
 def adicionar_comentario():
